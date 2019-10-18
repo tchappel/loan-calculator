@@ -1,0 +1,16 @@
+{
+	"name": "server",
+	"version": "0.0.0",
+	"private": true,
+	"engines": {
+		"node": ">=8"
+	},
+	"dependencies": {
+		"express": "^4.17.0"
+	},
+	"scripts": {
+		"start": "node src/app.js",
+		"lint": "yarn lint:eslint",
+		"lint:eslint": "eslint --ext .js ./"
+	}
+}
