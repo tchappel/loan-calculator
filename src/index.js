@@ -1,14 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import configureStore from './redux/configureStore'
+import { IntlProvider } from "react-intl";
+import configureStore from './redux/configureStore';
+import { messages } from './translations/configureMessages';
 import App from './App';
 
-const store = configureStore()
+const store = configureStore();
+
+const language = navigator.language.split(/[-_]/)[0];  // language without region code
 
 ReactDOM.render(
     <Provider store={store}>
-        <App />
+        <IntlProvider locale={language} messages={messages[language]}>
+            <App />
+        </IntlProvider>
     </Provider>
     , document.getElementById('root')
 );

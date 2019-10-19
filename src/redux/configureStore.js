@@ -2,19 +2,21 @@ import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { reducer as formReducer } from 'redux-form';
 import { combineEpics, createEpicMiddleware } from 'redux-observable';
-import { fetchInstalmentEpic } from './ducks/instalment';
-import instalmentReducer from './ducks/instalment';
+import instalmentReducer, { fetchInstalmentEpic } from './ducks/instalment';
+import interestRateReducer, { fetchInterestRateEpic } from './ducks/interestRate';
 
 const epicMiddleware = createEpicMiddleware();
 
 const rootEpic = combineEpics(
-    fetchInstalmentEpic
+    fetchInstalmentEpic,
+    fetchInterestRateEpic
 );
 
 const rootReducer = combineReducers({
     // ...your other reducers here
     form: formReducer,
     instalment: instalmentReducer,
+    interestRate: interestRateReducer,
 });
 
 export default function configureStore() {

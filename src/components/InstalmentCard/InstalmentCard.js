@@ -1,34 +1,54 @@
 import React from 'react';
-import { Card, CardTitle, InstalmentContainer, ButtonContainer, Contacts } from './styled';
+import { isEmpty } from 'ramda';
+import { Card, CardTitle, InstalmentContainer, ButtonContainer, Button, Contacts } from './styled';
+import { FormattedMessage, FormattedNumber } from 'react-intl';
+import { Icon } from 'antd';
 import { instalmentPropType } from '../../shapes';
-import { Button, Icon } from 'antd';
 
 const InstalmentCard = ({instalment = {}}) => (
     <Card>
         <CardTitle>
-            Your monthly instalment
+            <FormattedMessage
+                id="instalmentCard.title"
+                defaultMessage="Your monthly instalment"
+                description="title of the instalment card"
+            />
         </CardTitle>
-        <InstalmentContainer>
-            {
-                instalment.isLoading
-                    ?
-                    <Icon type="loading" style={{fontSize: 24}} spin />
-                    :
-                    instalment.data
-
-            }
-        </InstalmentContainer>
-        <ButtonContainer
-            visibility={instalment.isLoading ? 'hidden' : 'visible'}
-        >
-            <Button
-                type="primary"
-                size="large"
-            >
-                PROCEED
-            </Button>
-        </ButtonContainer>
-        <Contacts><Icon type="phone" />Contact one of our agents</Contacts>
+        {
+            !isEmpty(instalment) && !instalment.isLoading
+                ?
+                <React.Fragment>
+                    <InstalmentContainer>
+                        <FormattedNumber
+                            value={instalment.data}
+                            // eslint-disable-next-line
+                            style="currency"
+                            currency="CZK"
+                            minimumFractionDigits={0}
+                        />
+                    </InstalmentContainer>
+                    <Button
+                        type="primary"
+                        size="large"
+                    >
+                        <FormattedMessage
+                            id="instalmentCard.buttonProceed"
+                            defaultMessage="proceed"
+                            description="text of button 'proceed' inside InstalmentCard component"
+                        />
+                    </Button>
+                </React.Fragment>
+                :
+                <Icon type="loading" style={{fontSize: 24}} spin />
+        }
+        <Contacts>
+            <Icon type="phone" style={{marginRight: 5}} />
+            <FormattedMessage
+                id="instalmentCard.contactAgent"
+                defaultMessage="contact one of our agents"
+                description="text of link to contact agent inside InstalmentCard component"
+            />
+        </Contacts>
     </Card>
 );
 

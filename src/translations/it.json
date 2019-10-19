@@ -1,0 +1,14 @@
+{
+  "app.title": "calcola la rata del prestito",
+  "app.months": "mesi",
+  "loanForm.amount": "ammontare",
+  "loanForm.repaymentTime": "tempo di rimborso",
+  "loanForm.insurance": "assicurazione",
+  "loanForm.withInsurance": "con assicurazione",
+  "loanForm.withoutInsurance": "senza assicurazione",
+  "loanSummary.heading": "riepilogo",
+  "loanSummary.message": "Hai scelto la somma di <b>{amount}</b>, da ripagare entro <b>{months} mesi</b>, <b> {insuranceText}</b>. Al <b> tasso d'interesse del {interestRate}</b>, la tua <b>rata mensile è {instalment}</b>.",
+  "instalmentCard.title": "la tua rata mensile",
+  "instalmentCard.buttonProceed": "procedi",
+  "instalmentCard.contactAgent": "contatta un nostro agente"
+}

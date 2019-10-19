@@ -1,0 +1,14 @@
+{
+  "app.title": "kalkulačka půjček",
+  "app.months": "měsíce",
+  "loanForm.amount": "částka",
+  "loanForm.repaymentTime": "doba splácení",
+  "loanForm.insurance": "pojištění",
+  "loanForm.withInsurance": "s pojištěním",
+  "loanForm.withoutInsurance": "bez pojištění",
+  "loanSummary.heading": "souhrn",
+  "loanSummary.message": "Vybrali jste částku půjčky <b> {amount}</b>, která má být vrácena zpět do <b> {months} měsíců </b>, <b> {InsuranceText} < / b>. Při <b>úrokové sazbě {interestRate}</b> je <b>vaše měsíční splátka {instalment}</b>.",
+  "instalmentCard.title": "vaše měsíční splátka",
+  "instalmentCard.buttonProceed": "pokračovat",
+  "instalmentCard.contactAgent": "kontaktujte jednoho z našich agentů"
+}

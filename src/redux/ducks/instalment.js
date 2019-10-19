@@ -29,7 +29,7 @@ const url = ({amount, months, insurance}) => {
     return `http://localhost:8080/api/loan?amount=${amount}&months=${months}&insurance=${insurance}`;
 };
 
-export const fetchInstalmentEpic = (action$, state$) => action$.pipe(
+export const fetchInstalmentEpic = (action$) => action$.pipe(
     ofType(FETCH_INSTALMENT_REQUEST),
     debounceTime(500),
     switchMap(action => {
