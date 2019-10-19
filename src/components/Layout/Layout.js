@@ -1,8 +1,8 @@
 import React from 'react';
 import { Layout as AntdLayout } from 'antd';
 import { FormattedMessage } from 'react-intl';
-import { Header, Footer, Content, AppTitle } from './styled';
 import PropTypes from 'prop-types';
+import { Header, Footer, Content, AppTitle } from './styled';
 
 const Layout = ({children}) => (
     <AntdLayout>

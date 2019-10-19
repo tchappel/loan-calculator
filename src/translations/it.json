@@ -1,6 +1,7 @@
 {
   "app.title": "calcola la rata del prestito",
   "app.months": "mesi",
+  "button.ReloadPage": "ricarica la pagina",
   "loanForm.amount": "ammontare",
   "loanForm.repaymentTime": "tempo di rimborso",
   "loanForm.insurance": "assicurazione",
@@ -10,5 +11,7 @@
   "loanSummary.message": "Hai scelto la somma di <b>{amount}</b>, da ripagare entro <b>{months} mesi</b>, <b> {insuranceText}</b>. Al <b> tasso d'interesse del {interestRate}</b>, la tua <b>rata mensile è {instalment}</b>.",
   "instalmentCard.title": "la tua rata mensile",
   "instalmentCard.buttonProceed": "procedi",
-  "instalmentCard.contactAgent": "contatta un nostro agente"
+  "instalmentCard.contactAgent": "contatta un nostro agente",
+  "modalNoConnection.message": "<p>Impossibile connettersi al server.<br />Controlla la connessione e ricarica la pagina.</p>",
+  "modalNoConnection.title": "Nessuna connessione!"
 }

@@ -1,6 +1,7 @@
 {
   "app.title": "kalkulačka půjček",
   "app.months": "měsíce",
+  "button.ReloadPage": "znovu načíst stránku",
   "loanForm.amount": "částka",
   "loanForm.repaymentTime": "doba splácení",
   "loanForm.insurance": "pojištění",
@@ -10,5 +11,7 @@
   "loanSummary.message": "Vybrali jste částku půjčky <b> {amount}</b>, která má být vrácena zpět do <b> {months} měsíců </b>, <b> {InsuranceText} < / b>. Při <b>úrokové sazbě {interestRate}</b> je <b>vaše měsíční splátka {instalment}</b>.",
   "instalmentCard.title": "vaše měsíční splátka",
   "instalmentCard.buttonProceed": "pokračovat",
-  "instalmentCard.contactAgent": "kontaktujte jednoho z našich agentů"
+  "instalmentCard.contactAgent": "kontaktujte jednoho z našich agentů",
+  "modalNoConnection.message": "<p>Nelze se připojit k serveru.<br />Zkontrolujte prosím připojení a znovu načtěte stránku.</p>",
+  "modalNoConnection.title": "Žádné připojení!"
 }

@@ -1,8 +1,8 @@
 import React from 'react';
 import { isEmpty } from 'ramda';
-import { Card, CardTitle, InstalmentContainer, ButtonContainer, Button, Contacts } from './styled';
 import { FormattedMessage, FormattedNumber } from 'react-intl';
 import { Icon } from 'antd';
+import { Card, CardTitle, InstalmentContainer, Button, Contacts } from './styled';
 import { instalmentPropType } from '../../shapes';
 
 const InstalmentCard = ({instalment = {}}) => (

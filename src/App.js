@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { isEmpty } from 'ramda';
 import { connect } from 'react-redux';
-import { Row, Col, Spin } from 'antd';
-import { LoanForm } from './containers';
-import { LoanSummary, InstalmentCard, ModalNoConnection, Layout } from './components';
 import { formValueSelector } from 'redux-form';
+import { Row, Col, Spin } from 'antd';
 import PropTypes from 'prop-types';
 import 'antd/dist/antd.css';
+import { LoanForm } from './containers';
+import { LoanSummary, InstalmentCard, ModalNoConnection, Layout } from './components';
 import { fetchInstalmentRequest, selectInstalment } from './redux/ducks/instalment';
 import { fetchInterestRateRequest, selectInterestRate } from './redux/ducks/interestRate';
 import { instalmentPropType, interestRatePropType } from './shapes';

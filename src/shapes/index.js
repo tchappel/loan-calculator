@@ -11,3 +11,10 @@ export const interestRatePropType = PropTypes.shape({
     error: PropTypes.object,
     data: PropTypes.number,
 });
+
+const radioGroupOptionPropType = PropTypes.shape({
+    value: PropTypes.any,
+    label: PropTypes.string,
+});
+
+export const radioGroupOptionsPropType = PropTypes.arrayOf(radioGroupOptionPropType);

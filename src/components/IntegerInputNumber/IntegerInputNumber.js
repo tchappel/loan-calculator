@@ -1,4 +1,5 @@
 import React from 'react';
+import { propTypes } from 'redux-form';
 import { InputNumber } from 'antd';
 
 const IntegerInputNumber = ({input, meta, ...rest}) => (
@@ -8,5 +9,9 @@ const IntegerInputNumber = ({input, meta, ...rest}) => (
         {...rest}
     />
 );
+
+IntegerInputNumber.propTypes = {
+    ...propTypes.input
+};
 
 export default IntegerInputNumber;
