@@ -21,6 +21,10 @@ export const FormSectionSeparator = styled.div`
     height: 25px;
 `;
 
+export const SliderWrapper = styled.div`
+    padding-right: 50px;
+`
+
 export const SliderMarkLabel = styled.span`
     white-space: nowrap;
 `

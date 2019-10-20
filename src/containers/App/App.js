@@ -40,7 +40,13 @@ const App = ({
     return (
         <Layout>
             <Row>
-                <Col span={24}>
+                <Col
+                    xs={24}
+                    sm={24}
+                    md={12}
+                    lg={12}
+                    xl={12}
+                >
                     <AppSectionWrapper>
                         <LoanForm />
                     </AppSectionWrapper>
@@ -61,7 +67,13 @@ const App = ({
                         }
                     </AppSectionWrapper>
                 </Col>
-                <Col span={24}>
+                <Col
+                    xs={24}
+                    sm={24}
+                    md={12}
+                    lg={12}
+                    xl={12}
+                >
                     <AppSectionWrapper>
                         <Row type="flex" justify="center">
                             <InstalmentCard

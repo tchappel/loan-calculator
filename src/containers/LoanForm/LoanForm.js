@@ -3,7 +3,7 @@ import { compose } from 'ramda';
 import { reduxForm, Field } from 'redux-form';
 import { Row, Col } from 'antd';
 import { FormattedMessage, injectIntl } from 'react-intl';
-import { FormFieldHeading, FormFieldHeadingRow, FormSectionSeparator, SliderMarkLabel } from './styled';
+import { FormFieldHeading, FormFieldHeadingRow, FormSectionSeparator, SliderMarkLabel, SliderWrapper } from './styled';
 import { IntegerStep, IntegerInputNumber, RadioGroup } from '../../components';
 
 let LoanForm = ({handleSubmit, intl}) => {
@@ -41,39 +41,37 @@ let LoanForm = ({handleSubmit, intl}) => {
                     onBlur={event => event.preventDefault()}
                 />
             </FormFieldHeadingRow>
-            <Row>
-                <Col span={24}>
-                    <Field
-                        name={'amount'}
-                        component={IntegerStep}
-                        // custom props related to antd InputNumber component API
-                        // I choose to pass these props like this to separate them from Field props
-                        props={{
-                            min: 25000,
-                            max: 100000,
-                            step: 1000,
-                            marks: {
-                                25000: {
-                                    label: <SliderMarkLabel>CZK 25.000</SliderMarkLabel>
-                                },
-                                100000: {
-                                    label: <SliderMarkLabel>CZK 100.000</SliderMarkLabel>
+            <SliderWrapper>
+                <Field
+                    name={'amount'}
+                    component={IntegerStep}
+                    // custom props related to antd InputNumber component API
+                    // I choose to pass these props like this to separate them from Field props
+                    props={{
+                        min: 25000,
+                        max: 100000,
+                        step: 1000,
+                        marks: {
+                            25000: {
+                                label: <SliderMarkLabel>CZK 25.000</SliderMarkLabel>
+                            },
+                            100000: {
+                                label: <SliderMarkLabel>CZK 100.000</SliderMarkLabel>
+                            }
+                        },
+                        tipFormatter: value => {
+                            return intl.formatNumber(
+                                value,
+                                {
+                                    style: 'currency',
+                                    currency: 'CZK',
+                                    minimumFractionDigits: 0,
                                 }
-                            },
-                            tipFormatter: value => {
-                                return intl.formatNumber(
-                                    value,
-                                    {
-                                        style: 'currency',
-                                        currency: 'CZK',
-                                        minimumFractionDigits: 0,
-                                    }
-                                );
-                            },
-                        }}
-                    />
-                </Col>
-            </Row>
+                            );
+                        },
+                    }}
+                />
+            </SliderWrapper>
             <FormSectionSeparator />
             <FormFieldHeadingRow>
                 <FormFieldHeading>
@@ -98,30 +96,28 @@ let LoanForm = ({handleSubmit, intl}) => {
                     unit={translatedMonths}
                 />
             </FormFieldHeadingRow>
-            <Row>
-                <Col span={24}>
-                    <Field
-                        name={'months'}
-                        component={IntegerStep}
-                        // props related to antd InputNumber component API
-                        // I choose to pass these props like this to separate them from Field props
-                        props={{
-                            min: 12,
-                            max: 60,
-                            step: 1,
-                            marks: {
-                                12: {
-                                    label: <SliderMarkLabel>12 {translatedMonths}</SliderMarkLabel>
-                                },
-                                60: {
-                                    label: <SliderMarkLabel>60 {translatedMonths}</SliderMarkLabel>
-                                }
+            <SliderWrapper>
+                <Field
+                    name={'months'}
+                    component={IntegerStep}
+                    // props related to antd InputNumber component API
+                    // I choose to pass these props like this to separate them from Field props
+                    props={{
+                        min: 12,
+                        max: 60,
+                        step: 1,
+                        marks: {
+                            12: {
+                                label: <SliderMarkLabel>12 {translatedMonths}</SliderMarkLabel>
                             },
-                            tipFormatter: value => `${value} ${translatedMonths}`
-                        }}
-                    />
-                </Col>
-            </Row>
+                            60: {
+                                label: <SliderMarkLabel>60 {translatedMonths}</SliderMarkLabel>
+                            }
+                        },
+                        tipFormatter: value => `${value} ${translatedMonths}`
+                    }}
+                />
+            </SliderWrapper>
             <FormSectionSeparator />
             <FormFieldHeadingRow>
                 <FormFieldHeading>
