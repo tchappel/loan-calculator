@@ -1,12 +1,19 @@
 import React from 'react';
 import { Layout as AntdLayout } from 'antd';
-import { Header, Footer, Content, AppTitle } from './styled';
+import { FormattedMessage } from 'react-intl';
 import PropTypes from 'prop-types';
+import { Header, Footer, Content, AppTitle } from './styled';
 
 const Layout = ({children}) => (
     <AntdLayout>
         <Header>
-            <AppTitle>Loan Calculator </AppTitle>
+            <AppTitle>
+                <FormattedMessage
+                    id="app.title"
+                    defaultMessage="loan calculator"
+                    description="app title in main header"
+                />
+            </AppTitle>
         </Header>
         <Content>
             {children}

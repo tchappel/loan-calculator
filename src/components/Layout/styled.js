@@ -13,6 +13,7 @@ export const Header = styled(AntdHeader)`
 export const AppTitle = styled.h1`
     color: white;
     display: inline-block;
+    text-transform: capitalize;
 `;
 
 export const Content = styled(AntdContent)`

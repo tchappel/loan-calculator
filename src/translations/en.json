@@ -1,0 +1,17 @@
+{
+  "app.title": "loan calculator",
+  "app.months": "months",
+  "button.ReloadPage": "reload page",
+  "loanForm.amount": "amount",
+  "loanForm.repaymentTime": "repayment time",
+  "loanForm.insurance": "insurance",
+  "loanForm.withInsurance": "with insurance",
+  "loanForm.withoutInsurance": "without insurance",
+  "loanSummary.heading": "summary",
+  "loanSummary.message": "You have chosen a loan amount of <b>{amount}</b>, to be paid back in <b>{months} months</b>, <b> {insuranceText}</b>. At the <b>interest rate of {interestRate}</b>, your <b>monthly instalment is {instalment}</b>.",
+  "instalmentCard.title": "your monthly instalment",
+  "instalmentCard.buttonProceed": "proceed",
+  "instalmentCard.contactAgent": "contact one of our agents",
+  "modalNoConnection.message": "<p>Unable to connect with server.<br />Please check your connection and reload page.</p>",
+  "modalNoConnection.title": "No connection!"
+}

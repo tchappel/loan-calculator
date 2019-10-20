@@ -2,6 +2,7 @@ import React from 'react';
 import { Radio } from 'antd';
 import { propTypes } from 'redux-form';
 import { prop } from 'ramda';
+import { radioGroupOptionsPropType } from '../../shapes';
 
 const RadioGroup = ({input, options}) => (
     <Radio.Group
@@ -21,6 +22,7 @@ const RadioGroup = ({input, options}) => (
 );
 
 RadioGroup.propTypes = {
+    options: radioGroupOptionsPropType,
     ...propTypes.input
 };
 

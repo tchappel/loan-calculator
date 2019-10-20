@@ -1,17 +1,32 @@
 import React, { useEffect } from 'react';
+import { isEmpty } from 'ramda';
 import { connect } from 'react-redux';
-import { Row, Col, Spin } from 'antd';
-import { LoanForm } from './containers';
-import { LoanSummary, InstalmentCard, ModalNoConnection, Layout } from './components';
 import { formValueSelector } from 'redux-form';
+import { Row, Col, Spin } from 'antd';
 import PropTypes from 'prop-types';
 import 'antd/dist/antd.css';
+import { LoanForm } from './containers';
+import { LoanSummary, InstalmentCard, ModalNoConnection, Layout } from './components';
 import { fetchInstalmentRequest, selectInstalment } from './redux/ducks/instalment';
-import { instalmentPropType } from './shapes';
+import { fetchInterestRateRequest, selectInterestRate } from './redux/ducks/interestRate';
+import { instalmentPropType, interestRatePropType } from './shapes';
 
 const selector = formValueSelector('loan');
 
-const App = ({amount, months, insurance, fetchInstalmentRequest, instalment = {}}) => {
+const App = ({
+                 amount,
+                 months,
+                 insurance,
+                 fetchInstalmentRequest,
+                 fetchInterestRateRequest,
+                 instalment = {},
+                 interestRate = {},
+
+             }) => {
+
+    useEffect(() => {
+        fetchInterestRateRequest();
+    }, [fetchInterestRateRequest]);
 
     useEffect(() => {
         fetchInstalmentRequest({
@@ -27,16 +42,18 @@ const App = ({amount, months, insurance, fetchInstalmentRequest, instalment = {}
                 <Col span={12}>
                     <LoanForm />
                     {
-                        instalment.isLoading
+                        (!isEmpty(instalment) && !instalment.isLoading) &&
+                        (!isEmpty(interestRate) && !interestRate.isLoading)
                             ?
-                            <Spin />
-                            :
                             <LoanSummary
                                 amount={amount}
                                 months={months}
                                 insurance={insurance}
                                 instalment={instalment.data}
+                                interestRate={interestRate.data}
                             />
+                            :
+                            <Spin />
                     }
                 </Col>
                 <Col span={12}>
@@ -57,8 +74,10 @@ const App = ({amount, months, insurance, fetchInstalmentRequest, instalment = {}
 App.propTypes = {
     amount: PropTypes.number,
     fetchInstalmentRequest: PropTypes.func,
+    fetchInterestRateRequest: PropTypes.func,
     instalment: instalmentPropType,
     insurance: PropTypes.bool,
+    interestRate: interestRatePropType,
     months: PropTypes.number,
 };
 
@@ -67,8 +86,9 @@ const mapStateToProps = state => ({
     months: selector(state, 'months'),
     insurance: selector(state, 'insurance'),
     instalment: selectInstalment(state),
+    interestRate: selectInterestRate(state),
 });
 
-const mapDispatchToProps = {fetchInstalmentRequest};
+const mapDispatchToProps = {fetchInstalmentRequest, fetchInterestRateRequest};
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

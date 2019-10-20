@@ -53,6 +53,15 @@ app.get('/api/loan', (req, res) => {
     }, 500);
 });
 
+app.get('/api/interestRate', (req, res) => {
+    res.status(200).json({
+        type: 'success',
+        payload: {
+            interestRate
+        },
+    });
+});
+
 
 // Server
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
