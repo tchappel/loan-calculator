@@ -5,11 +5,12 @@ import { formValueSelector } from 'redux-form';
 import { Row, Col, Spin } from 'antd';
 import PropTypes from 'prop-types';
 import 'antd/dist/antd.css';
-import { LoanForm } from './containers';
-import { LoanSummary, InstalmentCard, ModalNoConnection, Layout } from './components';
-import { fetchInstalmentRequest, selectInstalment } from './redux/ducks/instalment';
-import { fetchInterestRateRequest, selectInterestRate } from './redux/ducks/interestRate';
-import { instalmentPropType, interestRatePropType } from './shapes';
+import { AppSectionWrapper } from './styled';
+import LoanForm from '../LoanForm';
+import { LoanSummary, InstalmentCard, ModalNoConnection, Layout } from '../../components';
+import { fetchInstalmentRequest, selectInstalment } from '../../redux/ducks/instalment';
+import { fetchInterestRateRequest, selectInterestRate } from '../../redux/ducks/interestRate';
+import { instalmentPropType, interestRatePropType } from '../../shapes';
 
 const selector = formValueSelector('loan');
 
@@ -39,29 +40,35 @@ const App = ({
     return (
         <Layout>
             <Row>
-                <Col span={12}>
-                    <LoanForm />
-                    {
-                        (!isEmpty(instalment) && !instalment.isLoading) &&
-                        (!isEmpty(interestRate) && !interestRate.isLoading)
-                            ?
-                            <LoanSummary
-                                amount={amount}
-                                months={months}
-                                insurance={insurance}
-                                instalment={instalment.data}
-                                interestRate={interestRate.data}
-                            />
-                            :
-                            <Spin />
-                    }
+                <Col span={24}>
+                    <AppSectionWrapper>
+                        <LoanForm />
+                    </AppSectionWrapper>
+                    <AppSectionWrapper>
+                        {
+                            (!isEmpty(instalment) && !instalment.isLoading) &&
+                            (!isEmpty(interestRate) && !interestRate.isLoading)
+                                ?
+                                <LoanSummary
+                                    amount={amount}
+                                    months={months}
+                                    insurance={insurance}
+                                    instalment={instalment.data}
+                                    interestRate={interestRate.data}
+                                />
+                                :
+                                <Spin />
+                        }
+                    </AppSectionWrapper>
                 </Col>
-                <Col span={12}>
-                    <Row type="flex" justify="center">
-                        <InstalmentCard
-                            instalment={instalment}
-                        />
-                    </Row>
+                <Col span={24}>
+                    <AppSectionWrapper>
+                        <Row type="flex" justify="center">
+                            <InstalmentCard
+                                instalment={instalment}
+                            />
+                        </Row>
+                    </AppSectionWrapper>
                 </Col>
             </Row>
             <ModalNoConnection

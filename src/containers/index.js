@@ -1,1 +1,1 @@
-export { default as LoanForm } from './LoanForm'
+export { default as App } from './App';

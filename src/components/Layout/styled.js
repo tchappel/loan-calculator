@@ -17,8 +17,8 @@ export const AppTitle = styled.h1`
 `;
 
 export const Content = styled(AntdContent)`
-    height: calc(100vh - ${headerHeight + footerHeight}px);
-    padding: 50px;
+    min-height: calc(100vh - ${headerHeight + footerHeight}px);
+    padding: 0 50px;
 `;
 
 export const Footer = styled(AntdFooter)`

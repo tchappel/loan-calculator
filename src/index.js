@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { IntlProvider } from "react-intl";
 import configureStore from './redux/configureStore';
 import { messages } from './translations/configureMessages';
-import App from './App';
+import { App } from './containers';
 
 const store = configureStore();
 

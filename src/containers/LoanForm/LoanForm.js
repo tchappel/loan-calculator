@@ -1,9 +1,9 @@
 import React from 'react';
 import { compose } from 'ramda';
 import { reduxForm, Field } from 'redux-form';
-import { Row, Col, Tag } from 'antd';
+import { Row, Col } from 'antd';
 import { FormattedMessage, injectIntl } from 'react-intl';
-import { FormFieldHeading } from './styled';
+import { FormFieldHeading, FormFieldHeadingRow, FormSectionSeparator, SliderMarkLabel } from './styled';
 import { IntegerStep, IntegerInputNumber, RadioGroup } from '../../components';
 
 let LoanForm = ({handleSubmit, intl}) => {
@@ -16,7 +16,7 @@ let LoanForm = ({handleSubmit, intl}) => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <Row>
+            <FormFieldHeadingRow>
                 <FormFieldHeading>
                     <FormattedMessage
                         id="loanForm.amount"
@@ -24,9 +24,25 @@ let LoanForm = ({handleSubmit, intl}) => {
                         description="Label for 'amount' field of 'loan' form"
                     />
                 </FormFieldHeading>
-            </Row>
+                <Field
+                    name={'amount'}
+                    component={IntegerInputNumber}
+                    unit="CZK"
+                    // props related to antd InputNumber component API and custom props
+                    // I choose to pass these props like this to separate them from Field props
+                    props={{
+                        formatter: value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, '.'),
+                        parser: value => value.replace(/\./g, ''),
+                        min: 25000,
+                        max: 100000,
+                        step: 1000,
+                    }}
+                    // fix bug: prevent blur event to convert the value in store into string
+                    onBlur={event => event.preventDefault()}
+                />
+            </FormFieldHeadingRow>
             <Row>
-                <Col span={18}>
+                <Col span={24}>
                     <Field
                         name={'amount'}
                         component={IntegerStep}
@@ -38,10 +54,10 @@ let LoanForm = ({handleSubmit, intl}) => {
                             step: 1000,
                             marks: {
                                 25000: {
-                                    label: '25.000 CZK'
+                                    label: <SliderMarkLabel>CZK 25.000</SliderMarkLabel>
                                 },
                                 100000: {
-                                    label: '100.000 CZK'
+                                    label: <SliderMarkLabel>CZK 100.000</SliderMarkLabel>
                                 }
                             },
                             tipFormatter: value => {
@@ -57,26 +73,9 @@ let LoanForm = ({handleSubmit, intl}) => {
                         }}
                     />
                 </Col>
-                <Col span={6}>
-                    <Field
-                        name={'amount'}
-                        component={IntegerInputNumber}
-                        // custom props related to antd InputNumber component API
-                        // I choose to pass these props like this to separate them from Field props
-                        props={{
-                            formatter: value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, '.'),
-                            parser: value => value.replace(/\./g, ''),
-                            min: 25000,
-                            max: 100000,
-                            step: 1000,
-                        }}
-                        // fix bug: prevent blur event to convert the value in store into string
-                        onBlur={event => event.preventDefault()}
-                    />
-                    <Tag>CZK</Tag>
-                </Col>
             </Row>
-            <Row>
+            <FormSectionSeparator />
+            <FormFieldHeadingRow>
                 <FormFieldHeading>
                     <FormattedMessage
                         id="loanForm.repaymentTime"
@@ -84,13 +83,27 @@ let LoanForm = ({handleSubmit, intl}) => {
                         description="Label for 'repayment time' field of 'loan' form"
                     />
                 </FormFieldHeading>
-            </Row>
+                <Field
+                    name={'months'}
+                    component={IntegerInputNumber}
+                    // prevent blur to convert the value in store into string
+                    onBlur={event => event.preventDefault()}
+                    // props related to antd InputNumber component API and custom props
+                    // I choose to pass these props like this to separate them from Field props
+                    props={{
+                        min: 12,
+                        max: 60,
+                        step: 1,
+                    }}
+                    unit={translatedMonths}
+                />
+            </FormFieldHeadingRow>
             <Row>
-                <Col span={18}>
+                <Col span={24}>
                     <Field
                         name={'months'}
                         component={IntegerStep}
-                        // custom props related to antd InputNumber component API
+                        // props related to antd InputNumber component API
                         // I choose to pass these props like this to separate them from Field props
                         props={{
                             min: 12,
@@ -98,36 +111,19 @@ let LoanForm = ({handleSubmit, intl}) => {
                             step: 1,
                             marks: {
                                 12: {
-                                    label: `12 ${translatedMonths}`
+                                    label: <SliderMarkLabel>12 {translatedMonths}</SliderMarkLabel>
                                 },
                                 60: {
-                                    label: `60 ${translatedMonths}`
+                                    label: <SliderMarkLabel>60 {translatedMonths}</SliderMarkLabel>
                                 }
                             },
                             tipFormatter: value => `${value} ${translatedMonths}`
                         }}
                     />
                 </Col>
-                <Col span={6}>
-                    <Field
-                        name={'months'}
-                        component={IntegerInputNumber}
-                        // custom props related to antd InputNumber component API
-                        // I choose to pass these props like this to separate them from Field props
-                        props={{
-                            min: 12,
-                            max: 60,
-                            step: 1,
-                        }}
-                        // prevent blur to convert the value in store into string
-                        onBlur={event => event.preventDefault()}
-                    />
-                    <Tag>
-                        {translatedMonths}
-                    </Tag>
-                </Col>
             </Row>
-            <Row>
+            <FormSectionSeparator />
+            <FormFieldHeadingRow>
                 <FormFieldHeading>
                     <FormattedMessage
                         id="loanForm.insurance"
@@ -135,33 +131,29 @@ let LoanForm = ({handleSubmit, intl}) => {
                         description="Label for 'insurance' field of 'loan' form"
                     />
                 </FormFieldHeading>
-            </Row>
-            <Row>
-                <Col span={24}>
-                    <Field
-                        name={'insurance'}
-                        component={RadioGroup}
-                        options={[
-                            {
-                                value: true,
-                                label: intl.formatMessage({
-                                    id: 'loanForm.withInsurance',
-                                    defaultMessage: 'with insurance',
-                                    description: 'radio option "with insurance" of "insurance" field in loan form',
-                                })
-                            },
-                            {
-                                value: false,
-                                label: intl.formatMessage({
-                                    id: 'loanForm.withoutInsurance',
-                                    defaultMessage: 'without insurance',
-                                    description: 'radio option "without insurance" of "insurance" field in loan form',
-                                })
-                            },
-                        ]}
-                    />
-                </Col>
-            </Row>
+            </FormFieldHeadingRow>
+            <Field
+                name={'insurance'}
+                component={RadioGroup}
+                options={[
+                    {
+                        value: true,
+                        label: intl.formatMessage({
+                            id: 'loanForm.withInsurance',
+                            defaultMessage: 'with insurance',
+                            description: 'radio option "with insurance" of "insurance" field in loan form',
+                        })
+                    },
+                    {
+                        value: false,
+                        label: intl.formatMessage({
+                            id: 'loanForm.withoutInsurance',
+                            defaultMessage: 'without insurance',
+                            description: 'radio option "without insurance" of "insurance" field in loan form',
+                        })
+                    },
+                ]}
+            />
         </form>
     );
 };

@@ -2,6 +2,7 @@ import React from 'react';
 import { Radio } from 'antd';
 import { propTypes } from 'redux-form';
 import { prop } from 'ramda';
+import { RadioOptionWrapper } from './styled';
 import { radioGroupOptionsPropType } from '../../shapes';
 
 const RadioGroup = ({input, options}) => (
@@ -10,12 +11,15 @@ const RadioGroup = ({input, options}) => (
     >
         {
             options.map(option => (
-                <Radio
+                <RadioOptionWrapper
                     key={prop('value', option) === undefined ? option : prop('value', option)}
-                    value={prop('value', option) === undefined ? option : prop('value', option)}
                 >
-                    {prop('label', option) === undefined ? option : prop('label', option)}
-                </Radio>
+                    <Radio
+                        value={prop('value', option) === undefined ? option : prop('value', option)}
+                    >
+                        {prop('label', option) === undefined ? option : prop('label', option)}
+                    </Radio>
+                </RadioOptionWrapper>
             ))
         }
     </Radio.Group>
