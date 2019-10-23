@@ -1,33 +1,39 @@
 import React, { useEffect } from 'react';
-import { isEmpty } from 'ramda';
+import PropTypes from 'prop-types';
+import { isEmpty, compose } from 'ramda';
 import { connect } from 'react-redux';
 import { formValueSelector } from 'redux-form';
 import { Row, Col, Spin } from 'antd';
-import PropTypes from 'prop-types';
 import 'antd/dist/antd.css';
 import { AppSectionWrapper } from './styled';
 import LoanForm from '../LoanForm';
+import LanguageSwitchForm from '../LanguageSwitchForm';
 import { LoanSummary, InstalmentCard, ModalNoConnection, Layout } from '../../components';
 import { fetchInstalmentRequest, selectInstalment } from '../../redux/ducks/instalment';
 import { fetchInterestRateRequest, selectInterestRate } from '../../redux/ducks/interestRate';
-import { instalmentPropType, interestRatePropType } from '../../shapes';
+import { fetchLocaleOptionsRequest, selectLocaleOptions } from '../../redux/ducks/localeOptions';
+import { instalmentPropType, interestRatePropType, localeOptionsPropType } from '../../shapes';
+import { injectIntl } from 'react-intl';
 
 const selector = formValueSelector('loan');
 
 const App = ({
+                 intl,
                  amount,
                  months,
+                 localeOptions = {},
                  insurance,
                  fetchInstalmentRequest,
                  fetchInterestRateRequest,
+                 fetchLocaleOptionsRequest,
                  instalment = {},
                  interestRate = {},
-
              }) => {
 
     useEffect(() => {
         fetchInterestRateRequest();
-    }, [fetchInterestRateRequest]);
+        fetchLocaleOptionsRequest();
+    }, [fetchInterestRateRequest, fetchLocaleOptionsRequest]);
 
     useEffect(() => {
         fetchInstalmentRequest({
@@ -39,6 +45,14 @@ const App = ({
 
     return (
         <Layout>
+            <AppSectionWrapper>
+                <LanguageSwitchForm
+                    localeOptions={localeOptions.data || []}
+                    initialValues={{
+                        userLocale: intl.locale
+                    }}
+                />
+            </AppSectionWrapper>
             <Row>
                 <Col
                     xs={24}
@@ -52,9 +66,12 @@ const App = ({
                     </AppSectionWrapper>
                     <AppSectionWrapper>
                         {
-                            (!isEmpty(instalment) && !instalment.isLoading) &&
-                            (!isEmpty(interestRate) && !interestRate.isLoading)
-                                ?
+                            isEmpty(instalment) ||
+                            instalment.isLoading ||
+                            isEmpty(interestRate) ||
+                            interestRate.isLoading ?
+                                <Spin />
+                                :
                                 <LoanSummary
                                     amount={amount}
                                     months={months}
@@ -62,8 +79,6 @@ const App = ({
                                     instalment={instalment.data}
                                     interestRate={interestRate.data}
                                 />
-                                :
-                                <Spin />
                         }
                     </AppSectionWrapper>
                 </Col>
@@ -84,7 +99,11 @@ const App = ({
                 </Col>
             </Row>
             <ModalNoConnection
-                visible={!!instalment.error}
+                visible={
+                    !!instalment.error ||
+                    !!interestRate.error ||
+                    !!localeOptions.error
+                }
             />
         </Layout>
     );
@@ -94,9 +113,11 @@ App.propTypes = {
     amount: PropTypes.number,
     fetchInstalmentRequest: PropTypes.func,
     fetchInterestRateRequest: PropTypes.func,
+    fetchLocaleOptionsRequest: PropTypes.func,
     instalment: instalmentPropType,
     insurance: PropTypes.bool,
     interestRate: interestRatePropType,
+    localeOptions: localeOptionsPropType,
     months: PropTypes.number,
 };
 
@@ -106,8 +127,16 @@ const mapStateToProps = state => ({
     insurance: selector(state, 'insurance'),
     instalment: selectInstalment(state),
     interestRate: selectInterestRate(state),
+    localeOptions: selectLocaleOptions(state),
 });
 
-const mapDispatchToProps = {fetchInstalmentRequest, fetchInterestRateRequest};
+const mapDispatchToProps = {
+    fetchInstalmentRequest,
+    fetchInterestRateRequest,
+    fetchLocaleOptionsRequest,
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default compose(
+    injectIntl,
+    connect(mapStateToProps, mapDispatchToProps)
+)(App);

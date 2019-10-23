@@ -17,6 +17,7 @@ export const Card = styled.div`
 
 export const CardTitle = styled.div`
     font-size: 22px;
+    text-align: center;
     &:first-letter{
         text-transform: capitalize
     }
@@ -29,10 +30,11 @@ export const InstalmentContainer = styled.div`
 
 export const Button = styled(AntdButton)`
     text-transform: uppercase;
-`
+`;
 
 export const Contacts = styled.div`
     text-decoration: underline;
     cursor: pointer;
+    text-align: center;
 `;
 

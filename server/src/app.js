@@ -3,6 +3,24 @@
  */
 const express = require('express');
 const interestRate = 0.07;
+const localeOptions = [
+    {
+        id: 'locale.en',
+        value: 'en',
+    },
+    {
+        value: 'cs',
+        id: 'locale.cs',
+    },
+    {
+        value: 'it',
+        id: 'locale.it'
+    },
+    {
+        value: 'vi',
+        id: 'locale.vi'
+    },
+];
 
 // credit to http://www.developphp.com/view.php?tid=1389
 const computeMonthlyInstalment = ({amount, interestRate, months, insurance}) => {
@@ -59,6 +77,15 @@ app.get('/api/interestRate', (req, res) => {
         payload: {
             interestRate
         },
+    });
+});
+
+app.get('/api/locale-options', (req, res) => {
+    res.status(200).json({
+        type: 'success',
+        payload: {
+            localeOptions
+        }
     });
 });
 

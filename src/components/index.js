@@ -5,3 +5,4 @@ export { default as RadioGroup } from './RadioGroup';
 export { default as LoanSummary } from './LoanSummary';
 export { default as InstalmentCard } from './InstalmentCard';
 export { default as ModalNoConnection } from './ModalNoConnection';
+export { default as Select } from './Select';

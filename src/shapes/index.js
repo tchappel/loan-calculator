@@ -18,3 +18,19 @@ const radioGroupOptionPropType = PropTypes.shape({
 });
 
 export const radioGroupOptionsPropType = PropTypes.arrayOf(radioGroupOptionPropType);
+
+export const localeOptionPropType = PropTypes.shape({
+    value: PropTypes.string,
+    id: PropTypes.string,
+});
+
+export const localeOptionsPropType = PropTypes.shape({
+    isLoading: PropTypes.bool,
+    error: PropTypes.object,
+    data: PropTypes.arrayOf(localeOptionPropType)
+});
+
+export const selectOptionPropType = PropTypes.shape({
+    value: PropTypes.any,
+    id: PropTypes.string,
+});
