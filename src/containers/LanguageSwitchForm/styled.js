@@ -7,6 +7,6 @@ export const Row = styled.div`
     align-items: center;
 `;
 
-export const FormFieldLabel = styled.label`
+export const Label = styled.label`
     width: 120px;
 `;

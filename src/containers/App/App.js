@@ -13,7 +13,7 @@ import { fetchInstalmentRequest, selectInstalment } from '../../redux/ducks/inst
 import { fetchInterestRateRequest, selectInterestRate } from '../../redux/ducks/interestRate';
 import { fetchLocaleOptionsRequest, selectLocaleOptions } from '../../redux/ducks/localeOptions';
 import { instalmentPropType, interestRatePropType, localeOptionsPropType } from '../../shapes';
-import { injectIntl } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 
 const selector = formValueSelector('loan');
 
@@ -51,6 +51,20 @@ const App = ({
                     initialValues={{
                         userLocale: intl.locale
                     }}
+                    label={
+                        <FormattedMessage
+                            id="userLocaleForm.selectLanguage"
+                            defaultMessage="select language"
+                            description="label for the select element to select user language"
+                        />
+                    }
+                    loadingOptionsMessage={
+                        <FormattedMessage
+                            id="userLocaleForm.loadingLanguages"
+                            defaultMessage="loading..."
+                            description="message to be displayed when app is loading options"
+                        />
+                    }
                 />
             </AppSectionWrapper>
             <Row>

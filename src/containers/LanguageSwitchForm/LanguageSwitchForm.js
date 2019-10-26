@@ -1,37 +1,25 @@
 import React from 'react';
-import { compose } from 'ramda';
 import PropTypes from 'prop-types';
 import { reduxForm, Field } from 'redux-form';
 import { Select } from '../../components';
 import { localeOptionPropType } from '../../shapes';
-import { FormattedMessage, injectIntl } from 'react-intl';
-import { Row, FormFieldLabel } from './styled';
+import { Row, Label } from './styled';
 
-const LanguageSwitchForm = ({handleSubmit, localeOptions = []}) => {
+const LanguageSwitchForm = ({handleSubmit, localeOptions = [], label, loadingOptionsMessage}) => {
 
     return (
         <form
             onSubmit={handleSubmit}
         >
             <Row>
-                <FormFieldLabel>
-                    <FormattedMessage
-                        id="userLocaleForm.selectLanguage"
-                        defaultMessage="select language"
-                        description="label for the select element to select user language"
-                    />
-                </FormFieldLabel>
+                <Label>
+                    {label}
+                </Label>
                 <Field
                     name="userLocale"
                     component={Select}
                     options={localeOptions}
-                    loadingOptionsMessage={
-                        <FormattedMessage
-                            id="userLocaleForm.loadingLanguages"
-                            defaultMessage="loading..."
-                            description="message to be displayed when app is loading options"
-                        />
-                    }
+                    loadingOptionsMessage={loadingOptionsMessage}
                     style={{width: 120}}
                 />
             </Row>
@@ -42,12 +30,10 @@ const LanguageSwitchForm = ({handleSubmit, localeOptions = []}) => {
 LanguageSwitchForm.propTypes = {
     localeOptions: PropTypes.arrayOf(localeOptionPropType),
     handleSubmit: PropTypes.func,
+    label: PropTypes.node,
+    loadingOptionsMessage: PropTypes.node,
 };
 
-export default compose(
-    injectIntl,
-    reduxForm({
-        // a unique name for the form
-        form: 'userLocale',
-    })
-)(LanguageSwitchForm);
+export default reduxForm({
+    form: 'userLocale',
+})(LanguageSwitchForm);
