@@ -1,0 +1,23 @@
+{
+  "locale.en": "Tiếng anh",
+  "locale.cs": "Tiếng séc",
+  "locale.it": "Tiếng Ý",
+  "locale.vi": "Tiếng Việt",
+  "userLocaleForm.selectLanguage": "chọn ngôn ngữ",
+  "userLocaleForm.loadingLanguages": "tải dữ...",
+  "app.title": "máy tính cho vay",
+  "app.months": "tháng",
+  "button.reloadPage": "tải lại trang",
+  "loanForm.amount": "số tiền",
+  "loanForm.repaymentTime": "thời gian trả nợ",
+  "loanForm.insurance": "bảo hiểm",
+  "loanForm.withInsurance": "có bảo hiểm",
+  "loanForm.withoutInsurance": "không có bảo hiểm",
+  "loanSummary.heading": "tóm lược",
+  "loanSummary.message": "<p>Bạn đã chọn số tiền cho vay <b> {amount} </b>, để được trả lại sau <b> {months} tháng</b>, <b> {insuranceText} </b>. Với <b>lãi suất của {interestRate} </b>, <b>trả góp hàng tháng của bạn là {instalment} </b>.</p>",
+  "instalmentCard.title": "trả góp hàng tháng của bạn",
+  "instalmentCard.buttonProceed": "tiến hành",
+  "instalmentCard.contactAgent": "liên hệ với một trong những đại lý của chúng tôi",
+  "modalNoConnection.message": "<p>Không thể kết nối với máy chủ. <br />Vui lòng kiểm tra kết nối của bạn và tải lại trang.</p>",
+  "modalNoConnection.title": "Không có kết nối!"
+}

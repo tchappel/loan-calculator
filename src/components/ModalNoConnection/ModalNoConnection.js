@@ -17,7 +17,7 @@ const ModalNoConnection = ({visible, intl}) => (
         footer={[
             <Button type="primary" onClick={() => window.location.reload()}>
                 <FormattedMessage
-                    id="button.ReloadPage"
+                    id="button.reloadPage"
                     description="message displayed on button to reload page"
                     defaultMessage="Reload Page"
                 />

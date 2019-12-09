@@ -15,8 +15,10 @@ const InstalmentCard = ({instalment = {}}) => (
             />
         </CardTitle>
         {
-            !isEmpty(instalment) && !instalment.isLoading
-                ?
+            isEmpty(instalment) ||
+            instalment.isLoading ?
+                <Icon type="loading" style={{fontSize: 24}} spin />
+                :
                 <React.Fragment>
                     <InstalmentContainer>
                         <FormattedNumber
@@ -38,8 +40,6 @@ const InstalmentCard = ({instalment = {}}) => (
                         />
                     </Button>
                 </React.Fragment>
-                :
-                <Icon type="loading" style={{fontSize: 24}} spin />
         }
         <Contacts>
             <Icon type="phone" style={{marginRight: 5}} />

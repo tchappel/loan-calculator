@@ -1,12 +1,11 @@
 import React from 'react';
 import { compose } from 'ramda';
 import { reduxForm, Field } from 'redux-form';
-import { Row, Col } from 'antd';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { FormFieldHeading, FormFieldHeadingRow, FormSectionSeparator, SliderMarkLabel, SliderWrapper } from './styled';
 import { IntegerStep, IntegerInputNumber, RadioGroup } from '../../components';
 
-let LoanForm = ({handleSubmit, intl}) => {
+const LoanForm = ({handleSubmit, intl}) => {
 
     const translatedMonths = intl.formatMessage({
         id: 'app.months',

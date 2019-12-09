@@ -4,12 +4,14 @@ import { reducer as formReducer } from 'redux-form';
 import { combineEpics, createEpicMiddleware } from 'redux-observable';
 import instalmentReducer, { fetchInstalmentEpic } from './ducks/instalment';
 import interestRateReducer, { fetchInterestRateEpic } from './ducks/interestRate';
+import localeOptionsReducer, { fetchLocaleOptionsEpic } from './ducks/localeOptions';
 
 const epicMiddleware = createEpicMiddleware();
 
 const rootEpic = combineEpics(
     fetchInstalmentEpic,
-    fetchInterestRateEpic
+    fetchInterestRateEpic,
+    fetchLocaleOptionsEpic,
 );
 
 const rootReducer = combineReducers({
@@ -17,9 +19,10 @@ const rootReducer = combineReducers({
     form: formReducer,
     instalment: instalmentReducer,
     interestRate: interestRateReducer,
+    localeOptions: localeOptionsReducer,
 });
 
-export default function configureStore() {
+function configureStore() {
     const store = createStore(rootReducer, composeWithDevTools(
         applyMiddleware(epicMiddleware),
         // other store enhancers if any
@@ -29,3 +32,6 @@ export default function configureStore() {
 
     return store;
 }
+
+export const store = configureStore();
+
